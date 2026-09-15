@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SantiagOS Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="crt">
+    <div class="terminal-window">
+      <div class="title-bar">
+        <span class="title-bar-text">C:\SANTIAGOS&gt;</span>
+        <div class="title-bar-controls">
+          <button type="button" aria-label="Minimizar">_</button>
+          <button type="button" aria-label="Maximizar">&#9633;</button>
+          <button type="button" aria-label="Cerrar">X</button>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <pre id="output"></pre>
+        <div class="input-line" id="input-line" hidden>
+          <span class="prompt">&gt;</span>
+          <span id="user-input" class="user-input" role="textbox" contenteditable="true" spellcheck="false"></span>
+          <span class="cursor">&#9608;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

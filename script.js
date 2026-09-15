@@ -2,6 +2,7 @@ const output = document.getElementById("output");
 const inputLine = document.getElementById("input-line");
 const userInput = document.getElementById("user-input");
 const menu = document.getElementById("menu");
+const asciiGif = document.getElementById("ascii-gif");
 const body = document.getElementById("terminal-body");
 
 const INTRO = `Hola, soy SantiagOS. Encantado de conocerte.
@@ -18,6 +19,28 @@ const MENU_OPTIONS = [
   { label: "Mi superpoder", answer: "Mi superpoder es lograr traer las ideas a la realidad, teniendo en cuenta un factor fundamental: la gente. Que las cosas se adapten a cómo las personas quieren verlas y que les permitan resolver problemas que ni siquiera sabían que podían solucionarse, o hacer mejor aquello que ya existe, es siempre mi punto central. Es algo que pocas veces encontrarás en este mundo contemporáneo." },
   { label: "Mi reto", answer: "Mi reto es solucionar los problemas que enfrenta nuestro mundo, pero no de maneras banales o poco precisas, pues considero que esas soluciones carecen de vida. Las soluciones radican en las personas y en cómo podemos lograr que la gente se sienta, sobre todo, escuchada." },
   { label: "Por que quiero ser parte de Takeda", answer: "Hace unos meses, mi creador tuvo la oportunidad de realizar un intercambio en Japón, donde no solo visitó una de las culturas más disciplinadas y educadas del mundo, sino que también experimentó soluciones japonesas que siempre priorizaban al usuario y lograban una armonía entre la persona y su entorno, a veces sin necesidad de tecnología. Dice que le pareció tan すごい que desea incorporar esa filosofía en sus futuras soluciones, y qué mejor manera de hacerlo que formando parte de una compañía de la misma índole." },
+  { label: "Despedida", farewell: true },
+];
+
+const FAREWELL_TEXT = "Ha sido un placer hablar contigo. ¡Hasta la próxima!\n\n";
+
+const FAREWELL_FRAMES = [
+`   \\o/
+    |
+   / \\
+`,
+`    o/
+    |
+   / \\
+`,
+`   \\o
+    |
+   / \\
+`,
+`    o/
+    |
+   / \\
+`,
 ];
 
 let selectedIndex = 0;
@@ -74,12 +97,28 @@ function showMenu() {
   scrollToBottom();
 }
 
+function playFarewellAnimation() {
+  asciiGif.hidden = false;
+  let frame = 0;
+  setInterval(() => {
+    asciiGif.textContent = FAREWELL_FRAMES[frame % FAREWELL_FRAMES.length];
+    frame++;
+    scrollToBottom();
+  }, 400);
+}
+
 function selectMenuOption() {
   const option = MENU_OPTIONS[selectedIndex];
   menuActive = false;
   menu.hidden = true;
 
   output.textContent += "> " + option.label + "\n\n";
+
+  if (option.farewell) {
+    typeText(FAREWELL_TEXT, 25, playFarewellAnimation);
+    return;
+  }
+
   typeText(option.answer + "\n\n", 25, () => {
     typeText("¿Que mas deseas conocer de mi?\n\n", 20, showMenu);
   });
